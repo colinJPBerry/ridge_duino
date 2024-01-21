@@ -1,11 +1,17 @@
+#include "test_config.hpp"
+
 #include <Adafruit_NeoPixel.h>
 #include <DMXSerial.h>
 
-#define WS2812_PIN 7
-#define PIXEL_CONFIG NEO_RBG + NEO_KHZ800
 #define LED_COUNT 50
 
-#define DMX_START_ADDRESS 400
+// defaults for #define
+#ifndef WS2812_PIN
+#define WS2812_PIN 7
+#endif
+#ifndef PIXEL_CONFIG
+#define PIXEL_CONFIG NEO_RBG + NEO_KHZ800
+#endif
 
 Adafruit_NeoPixel strip =
     Adafruit_NeoPixel(LED_COUNT, WS2812_PIN, PIXEL_CONFIG);
