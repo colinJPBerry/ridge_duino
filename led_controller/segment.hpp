@@ -57,11 +57,13 @@ struct Segment {
 
 struct SegmentMode {
     uint16_t count;
+    uint16_t address;
     Segment *data;
 
-    template <typename... Segments> SegmentMode(Segments... segments) {
+    template <typename... Segments> SegmentMode(uint16_t address, Segments... segments) {
         this->count = sizeof...(Segments);
         this->data = new Segment[this->count]{segments...};
+        this->address = address;
     }
 };
 
