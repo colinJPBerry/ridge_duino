@@ -9,25 +9,6 @@ struct segment_t {
     uint8_t parameter;
 };
 
-// // read segment information from dmx
-// segment_t read_dmx(uint16_t i) {
-//     const auto dmx_read = [](uint16_t n) {
-//         return DMXSerial.read(DMX_START_ADDRESS + n);
-//     };
-//
-//     uint8_t r = dmx_read(i * 5 + 0);
-//     uint8_t g = dmx_read(i * 5 + 1);
-//     uint8_t b = dmx_read(i * 5 + 2);
-//     uint8_t m = dmx_read(i * 5 + 3);
-//     uint8_t p = dmx_read(i * 5 + 4);
-//
-//     return {
-//         .color = LEDStrip::Color(r, g, b),
-//         .mode = m,
-//         .parameter = p,
-//     };
-// }
-
 // something went wrong!
 // make <blinks> short blinks
 template <typename... Blinks> void panic(Blinks... blinks) {
@@ -54,9 +35,7 @@ void setup() {
     strip::show();
 }
 
-using modefunc_t = void (*)(const uint32_t &, uint16_t, uint16_t, uint32_t &);
-using repfunc_t = void (*)(const uint32_t *, uint16_t, uint32_t &);
-const uint16_t REP_LENGTH = 9;
+uint32_t time = millis();
 
 void loop() {
     const SegmentMode &mode = strip::get_mode();
@@ -65,7 +44,6 @@ void loop() {
         {LEDStrip::Color(0, 255, 0), 0, 0},
         {LEDStrip::Color(0, 0, 255), 0, 0},
     };
-    uint32_t time = millis();
 
     for (uint16_t segn = 0; segn < mode.count; segn++) {
         const segment_t &data = DUMMY_DATA[segn];

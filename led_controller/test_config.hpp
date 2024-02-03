@@ -2,7 +2,7 @@
 
 #include "segment.hpp"
 
-#define PIXEL_CONFIG NEO_RBG + NEO_KHZ800
+#define PIXEL_CONFIG NEO_RGB + NEO_KHZ800
 #define LED_STRIP_CONTROL_PIN 7
 #define LED_STRIP_LENGTH 50
 
