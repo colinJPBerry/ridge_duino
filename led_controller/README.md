@@ -115,6 +115,8 @@ TODO
 
 ## Blink Patterns
 
+If the arduino's light is on but the arduino still seems to run, that means the program is taking too long to calculate and display the next frame. If, visually, this is fine, you can ignore it. However, it does mean the program will be running slower than it should.
+
 If the arduino is not responding and you find it blinking it's little LED, that means something went wrong. there is a 500ms pause between each series of blinks, and a 1s pause before repeating the pattern.
 
 Here's what the different blink codes mean:

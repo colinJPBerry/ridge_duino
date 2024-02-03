@@ -32,12 +32,21 @@ void setup() {
     // DMXSerial.init(DMXProbe);
     Serial.begin(9600);
     strip::init();
-    strip::show();
 }
 
+const uint32_t INTERVAL_LEN = 1000 / 30;
 uint32_t time = millis();
+uint32_t target_time = time + INTERVAL;
 
 void loop() {
+    time = millis();
+    if (time > target_time) {
+        digitalWrite(LED_BUILTIN, HIGH);
+    }
+    while (time < target_time)
+        time = millis();
+    target_time = time + INTERVAL;
+
     const SegmentMode &mode = strip::get_mode();
     const segment_t DUMMY_DATA[] = {
         {LEDStrip::Color(255, 0, 0), 0, 0},
@@ -55,7 +64,4 @@ void loop() {
     }
 
     strip::show();
-    // } else {
-    //     panic(3);
-    // }
 }
