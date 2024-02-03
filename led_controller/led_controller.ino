@@ -66,21 +66,28 @@ segment_t read_dmx(uint16_t i) {
 
 // something went wrong!
 // make <blinks> short blinks
-void panic(uint8_t blinks) {
+template <typename... Blinks> void panic(Blinks... blinks) {
+    uint8_t _blinks[] = {blinks...};
     while (1) {
-        for (uint8_t i = 0; i < blinks; i++) {
-            digitalWrite(LED_BUILTIN, HIGH);
-            delay(50);
-            digitalWrite(LED_BUILTIN, LOW);
-            delay(50);
+        for (uint8_t blink : _blinks) {
+            for (uint8_t i = 0; i < blink; i++) {
+                digitalWrite(LED_BUILTIN, HIGH);
+                delay(50);
+                digitalWrite(LED_BUILTIN, LOW);
+                delay(50);
+            }
+            delay(500);
         }
-        delay(max(1000 - blinks * 100, 300));
+        delay(1000);
     }
 }
 
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     DMXSerial.init(DMXProbe);
+    strip::init();
+
+    panic(1, 2, 3);
 }
 
 void loop() {

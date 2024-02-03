@@ -113,8 +113,14 @@ TODO
 
 TODO
 
-## Blink Codes
+## Blink Patterns
 
-If the arduino is not responding and you find it blinking it's little LED, that means something went wrong. Here's what the different blink codes mean:
+If the arduino is not responding and you find it blinking it's little LED, that means something went wrong. there is a 500ms pause between each series of blinks, and a 1s pause before repeating the pattern.
+
+Here's what the different blink codes mean:
 
 TODO
+
+| Pattern | Meaning                   |
+| ------- | ------------------------- |
+| 3       | DMX packet read timed out |
