@@ -36,7 +36,7 @@ void setup() {
 
 const uint32_t INTERVAL_LEN = 1000 / 30;
 uint32_t time = millis();
-uint32_t target_time = time + INTERVAL;
+uint32_t target_time = time + INTERVAL_LEN;
 
 void loop() {
     time = millis();
@@ -45,7 +45,7 @@ void loop() {
     }
     while (time < target_time)
         time = millis();
-    target_time = time + INTERVAL;
+    target_time = time + INTERVAL_LEN;
 
     const SegmentMode &mode = strip::get_mode();
     const segment_t DUMMY_DATA[] = {
