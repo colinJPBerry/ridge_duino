@@ -16,23 +16,23 @@ namespace strip {
 LEDStrip strip =
     LEDStrip(LED_STRIP_LENGTH, LED_STRIP_CONTROL_PIN, PIXEL_CONFIG);
 
-void init() {
+inline void init() {
     strip.begin();
 }
-void set_pixel(uint16_t i, uint32_t color) {
+inline void set_pixel(uint16_t i, uint32_t color) {
     strip.setPixelColor(i, color);
 }
-void show() {
+inline void show() {
     strip.show();
 }
 
 #elif defined(LED_STRIP_CONTROL_PINS)
 
-void init() {
+inline void init() {
 }
-void set_pixel(uint16_t i, uint32_t color) {
+inline void set_pixel(uint16_t i, uint32_t color) {
 }
-void show() {
+inline void show() {
 }
 
 #endif
@@ -86,8 +86,6 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     DMXSerial.init(DMXProbe);
     strip::init();
-
-    panic(1, 2, 3);
 }
 
 void loop() {
