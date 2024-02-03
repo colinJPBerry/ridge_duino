@@ -3,11 +3,41 @@
 #include <Adafruit_NeoPixel.h>
 #include <DMXSerial.h>
 
-#define LED_COUNT 50
 #define DMX_START_ADDRESS -1
 
-Adafruit_NeoPixel strip =
-    Adafruit_NeoPixel(LED_COUNT, LED_STRIP_CONTROL_PIN, PIXEL_CONFIG);
+using LEDStrip = Adafruit_NeoPixel;
+
+namespace strip {
+
+#if defined(LED_STRIP_CONTROL_PINS) && defined(LED_STRIP_CONTROL_PIN)
+#error "LED_STRIP_CONTROL_PIN and LED_STRIP_CONTROL_PINS are both defined!"
+#elif defined(LED_STRIP_CONTROL_PIN)
+
+LEDStrip strip =
+    LEDStrip(LED_STRIP_LENGTH, LED_STRIP_CONTROL_PIN, PIXEL_CONFIG);
+
+void init() {
+    strip.begin();
+}
+void set_pixel(uint16_t i, uint32_t color) {
+    strip.setPixelColor(i, color);
+}
+void show() {
+    strip.show();
+}
+
+#elif defined(LED_STRIP_CONTROL_PINS)
+
+void init() {
+}
+void set_pixel(uint16_t i, uint32_t color) {
+}
+void show() {
+}
+
+#endif
+
+} // namespace strip
 
 struct segment_t {
     uint32_t color;
@@ -28,7 +58,7 @@ segment_t read_dmx(uint16_t i) {
     uint8_t p = dmx_read(i * 5 + 4);
 
     return {
-        .color = strip.Color(r, g, b),
+        .color = strip::strip.Color(r, g, b),
         .mode = m,
         .parameter = p,
     };

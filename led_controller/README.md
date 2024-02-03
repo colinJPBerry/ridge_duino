@@ -32,6 +32,7 @@ The general format for a config file is as follows:
 #define LED_STRIP_LENGTHS {50, 50, 50}
 // OPTION 2: single LED strip connected to the arduino
 #define LED_STRIP_CONTROL_PIN 7
+#define LED_STRIP_LENGTH 50
 
 // OPTION 1: a single LED segment mode
 const SegmentMode MODE = {

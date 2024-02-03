@@ -4,6 +4,7 @@
 
 #define PIXEL_CONFIG NEO_RBG + NEO_KHZ800
 #define LED_STRIP_CONTROL_PIN 2
+#define LED_STRIP_LENGTH 50
 
 const SegmentMode MODE = {
     999,
